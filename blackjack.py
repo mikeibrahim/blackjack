@@ -15,13 +15,33 @@
 import time
 
 # Array of Cards
-colors = ['diamonds', 'clubs', 'heart', 'spades']
+suits = ['Diamonds', 'Clubs', 'Heart', 'Spades']
+ranks = [["A",1], ["2",2], ["3",3], ["4",4], ["5",5], ["6",6], ["7",7], ["8",8], ["9",9], ["10",10], ["J",10], ["Q",10], ["K",10]]
 
-class Card:
-    def __init__(self, value, color):
-        self.value = value
-        self.color = color
+class Card(object):
+    def __init__(self, rank, suit):
+        self.rank = rank[0]
+        self.suit = suit
+        self.value = rank[1]
+#        print(self.rank + " " + self.suit + ": " + str(self.value))
         
+    def show(self):
+        print(self.rank + " " + self.suit)
+        
+
+
+class Deck(object):
+    def __init__(self):
+        self.cards = []
+        for suit in suits:
+            for rank in ranks:
+                card = Card(rank, suit)
+                self.cards.append(card)
+
+    def show(self):
+        print("Deck size: " + str(len(self.cards)))
+        for c in self.cards:
+            c.show()
 
 def main():
     print("")
@@ -30,10 +50,9 @@ def main():
     print("------------")
     print("")
 
-    for color in colors:
-        print("Color: " + color)
-        
-    deck = [Card(value, color) for value in range(1, 14) for color in colors]
+#    deck = [Card(rank, suit) for rank in ranks for suit in suits]
+    deck = Deck()  
+    deck.show()
     
 
     return 0
